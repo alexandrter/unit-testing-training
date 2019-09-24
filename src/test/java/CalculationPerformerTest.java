@@ -1,10 +1,9 @@
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Matchers.anyDouble;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class CalculationPerformerTest {
@@ -17,10 +16,7 @@ public class CalculationPerformerTest {
     public void testPerformMultiplication() {
         calculationPerformer.getCalculationResult(10, 5, Operator.MULTIPLICATION);
 
-        verify(calculator, times(1)).multiply(10, 5);
-        verify(calculator, never()).divide(anyDouble(), anyDouble());
-        verify(calculator, never()).add(anyDouble(), anyDouble());
-        verify(calculator, never()).subtract(anyDouble(), anyDouble());
+        verify(calculator, only()).multiply(10, 5);
     }
 
     @Test
@@ -39,5 +35,14 @@ public class CalculationPerformerTest {
     public void testPerformSubtraction() {
         calculationPerformer.getCalculationResult(10, 5, Operator.SUBTRACTION);
         verify(calculator, only()).subtract(10, 5);
+    }
+
+    @Test
+    public void testShouldThrowException() {
+        Throwable actualException =
+                assertThrows(UnsupportedOperationException.class,
+                        () -> calculationPerformer.getCalculationResult(10, 5, Operator.MODULO));
+
+        assertEquals("This method supports only multiplication, division, addition and subtraction", actualException.getMessage());
     }
 }

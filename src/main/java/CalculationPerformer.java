@@ -14,7 +14,7 @@ public class CalculationPerformer {
         } else if (Operator.ADDITION.equals(operator)) {
             return calculator.add(x, y);
         } else if (Operator.SUBTRACTION.equals(operator)) {
-            return calculator.subtract(y, x);
+            return calculator.subtract(x, y);
         } else {
             throw new UnsupportedOperationException("This method supports only multiplication, division, addition and subtraction");
         }
