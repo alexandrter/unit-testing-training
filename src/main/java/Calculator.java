@@ -15,4 +15,8 @@ public class Calculator {
     public double add(double addendum1, double addendum2) {
         return addendum1 + addendum2;
     }
+
+    public boolean isOdd(int number) {
+        return number % 2 != 0;
+    }
 }

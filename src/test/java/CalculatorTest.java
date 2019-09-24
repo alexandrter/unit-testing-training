@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CalculatorTest {
 
@@ -26,5 +30,16 @@ public class CalculatorTest {
         assertEquals(30, calculator.add(10, 20));
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-35, 71, 1273671, Integer.MAX_VALUE})
+    public void testShouldBeOdd(int numbers) {
+        assertTrue(calculator.isOdd(numbers));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-151812, 22, 21518, Integer.MIN_VALUE})
+    public void testShouldNotBeOdd(int numbers) {
+        assertFalse(calculator.isOdd(numbers));
+    }
 
 }
