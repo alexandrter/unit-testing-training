@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +14,9 @@ public class CalculatorTest {
 
     @Test
     public void testMultiplication() {
-        assertEquals(200, calculator.multiply(10, 20));
+        assertEquals(200, calculator.multiply(10, 20)); //Junit
+        assertThat(calculator.multiply(10,20)).isEqualTo(200); //assertJ
+        org.hamcrest.MatcherAssert.assertThat(calculator.multiply(10,20), equalTo(200.0)); //hamcrest
     }
 
     @Test
