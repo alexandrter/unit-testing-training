@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class CalculationPerformer {
 
     private final Calculator calculator;
@@ -6,18 +8,29 @@ public class CalculationPerformer {
         this.calculator = calculator;
     }
 
-    public double getCalculationResult(double x, double y, Operator operator) {
+    public CalculationResult getCalculationResult(double x, double y, Operator operator) {
+
+        final CalculationResult calculationResult = new CalculationResult();
+
         if (Operator.MULTIPLICATION.equals(operator)) {
-            return calculator.multiply(x, y);
+            calculationResult.setNumber(calculator.multiply(x, y));
         } else if (Operator.DIVISION.equals(operator)) {
-            return calculator.divide(x, y);
+            calculationResult.setNumber(calculator.divide(x, y));
         } else if (Operator.ADDITION.equals(operator)) {
-            return calculator.add(x, y);
+            calculationResult.setNumber(calculator.add(x, y));
         } else if (Operator.SUBTRACTION.equals(operator)) {
-            return calculator.subtract(y, x);
+            calculationResult.setNumber(calculator.subtract(x, y));
         } else {
             throw new UnsupportedOperationException("This method supports only multiplication, division, addition and subtraction");
         }
+
+        if (calculator.isOdd((int)calculationResult.getNumber())) {
+            calculationResult.setColor(Color.RED);
+        } else {
+            calculationResult.setColor(Color.GRAY);
+        }
+
+        return calculationResult;
     }
 
 }
